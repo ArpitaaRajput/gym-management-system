@@ -287,10 +287,10 @@ table tr:hover {
 .table-card tbody td {
   padding: 12px 15px;
   color: #ddd;
-  word-wrap: break-word;        /* wrap long words */
-  overflow-wrap: anywhere;      /* modern approach */
-  white-space: normal;          /* allow wrapping */
-  max-width: 200px;             /* optional, limit width of email column */
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  max-width: 200px;
 }
 
 .dashboard-tables {
@@ -305,12 +305,12 @@ table tr:hover {
 .table-card {
   flex: 1 1 45%;
   max-width: 800px;
-  min-width: 400px;       /* ensures table doesn't shrink too much */
+  min-width: 400px;
   background: #1e1e1e;
   border-radius: 10px;
   padding: 15px;
   box-sizing: border-box;
-  overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .table-card table {
@@ -911,33 +911,33 @@ input {
 /* Container around input and icon */
 .search-wrapper {
   display: flex;
-  justify-content: center; /* horizontal center */
+  justify-content: center;
   margin: 20px 0;
 }
 
 .search-container {
   position: relative;
-  width: 500px; /* adjust width */
+  width: 500px;
   margin: 20px 0;
 }
 
 /* Search input */
 #searchBillInput {
   width: 100%;
-  padding: 10px 40px 10px 15px; /* leave space for icon */
+  padding: 10px 40px 10px 15px;
   border: 1px solid #ccc;
   border-radius: 25px;
   font-size: 16px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Focus effect */
 #searchBillInput:focus {
   outline: none;
   border: 5px solid;
-  border-color: #4a7ecb; /* green highlight */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-color: #4a7ecb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Magnifying glass icon */
@@ -948,7 +948,7 @@ input {
   transform: translateY(-50%);
   font-size: 18px;
   color: #999;
-  pointer-events: none; /* allows clicking input */
+  pointer-events: none;
 }
 
 .members-container {
@@ -959,12 +959,12 @@ input {
 }
 
 .member-containers .card {
-  flex: 1 1 350px;       /* min width 350px per card */
-  max-width: 500px;      /* optional: prevent it from getting too wide */
+  flex: 1 1 350px;
+  max-width: 500px;
   background-color: #1f1f1f;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .member-containers .card h3 {
@@ -972,10 +972,10 @@ input {
 }
 
 .scroll-box {
-  max-height: 150px;        /* adjust height as needed */
-  overflow-y: auto;         
+  max-height: 150px;
+  overflow-y: auto;
   padding: 10px;
-  background-color: #2a2a2a; /* slightly lighter than card for contrast */
+  background-color: #2a2a2a;
   border-radius: 6px;
   scrollbar-width: thin;
   scrollbar-color: #ff5252 #1f1f1f;
@@ -998,4 +998,3 @@ input {
 .scroll-box::-webkit-scrollbar-thumb:hover {
   background-color: #ff2e2e;
 }
-
