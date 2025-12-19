@@ -1,16 +1,12 @@
-// admin-login.js
 import { auth } from './firebase-app.js';
-import {
-  signInWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const msgBox = document.getElementById("adminLoginMsg");
 const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", adminLogin);
 
-/* ================= ADMIN LOGIN FUNCTION ================= */
+/* ------------------ ADMIN LOGIN FUNCTION ------------------ */
 
 async function adminLogin() {
   const email = document.getElementById("adminEmail").value.trim();
@@ -64,7 +60,7 @@ async function adminLogin() {
   }
 }
 
-/* ================= AUTO REDIRECT CHECK ================= */
+/* ------------------ AUTO REDIRECT CHECK ------------------ */
 
 auth.onAuthStateChanged(async (user) => {
   if (user) {

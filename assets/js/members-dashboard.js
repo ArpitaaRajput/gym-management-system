@@ -1,8 +1,7 @@
 import { collection, getDocs, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-
 import { db, getAllSupplements, getMemberBillsByUID, getAllNotifications, auth } from "./firebase-app.js";
 
-/* =================== PAGE PROTECTION =================== */
+/* ----------------------- PAGE PROTECTION -------------------- */
 export function checkMemberLogin() {
   console.log("Checking member login");
 
@@ -16,7 +15,7 @@ export function checkMemberLogin() {
   }
 }
 
-/* =================== LOGOUT =================== */
+/* -------------------- LOGOUT -------------------- */
 export function memberLogout() {
   console.log("Member logout initiated");
 
@@ -27,7 +26,8 @@ export function memberLogout() {
   window.location.href = "../../pages/auth/members-login.html";
 }
 
-/* =================== ELEMENTS =================== */
+/* ---------------------- ELEMENTS ----------------------- */
+
 checkMemberLogin();
 
 const logoutBtn = document.getElementById("logoutBtn");
@@ -43,7 +43,8 @@ logoutBtn?.addEventListener("click", () => {
   memberLogout();
 });
 
-/* =================== REAL-TIME NOTIFICATIONS =================== */
+/* ---------------------- REAL-TIME NOTIFICATIONS -------------------- */
+
 function renderNotificationsRealTime() {
   console.log("Subscribing to real-time notifications");
 
@@ -68,10 +69,9 @@ function renderNotificationsRealTime() {
   });
 }
 
-/* =================== SEARCH BILLS =================== */
-document
-  .getElementById("searchBillInput")
-  ?.addEventListener("input", async (e) => {
+/* --------------------- SEARCH BILLS -------------------- */
+
+document.getElementById("searchBillInput")?.addEventListener("input", async (e) => {
 
     const searchText = e.target.value.trim().toLowerCase();
     console.log("Bill search input:", searchText);
@@ -125,7 +125,8 @@ document
     }
   });
 
-/* =================== RENDER MEMBER BILLS =================== */
+/* ----------------- RENDER MEMBER BILLS ---------------- */
+
 async function renderMemberBills() {
   console.log("Rendering member bills");
 
@@ -164,7 +165,8 @@ async function renderMemberBills() {
   }
 }
 
-/* =================== RENDER NOTIFICATIONS =================== */
+/* -------------------- RENDER NOTIFICATIONS --------------------- */
+
 async function renderNotifications() {
   console.log("Loading notifications (one-time)");
 
@@ -182,7 +184,8 @@ async function renderNotifications() {
   }
 }
 
-/* =================== RENDER SUPPLEMENTS =================== */
+/* --------------------- RENDER SUPPLEMENTS ------------------- */
+
 async function renderSupplements() {
   console.log("Loading supplements");
 
@@ -213,7 +216,8 @@ async function renderSupplements() {
   }
 }
 
-/* =================== INITIAL LOAD =================== */
+/* --------------------- INITIAL LOAD ------------------- */
+
 console.log("Member dashboard initialization started");
 
 renderMemberBills();

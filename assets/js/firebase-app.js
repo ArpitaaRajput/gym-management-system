@@ -1,27 +1,10 @@
-// ----------------- FIREBASE SETUP -----------------
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  serverTimestamp,
-  addDoc,
-  setDoc,
-  doc,
-  getDocs,
-  getDoc,
-  query,
-  where,
-  deleteDoc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getFirestore, collection, serverTimestamp, addDoc, setDoc, doc, getDocs, getDoc, query, where, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
-// ----------------- CONFIG -----------------
+/* ----------------- CONFIG ----------------- */
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDGiiO10is22wQewARV2vm88Ck4PV9RUIU",
   authDomain: "gym-management-e519d.firebaseapp.com",
@@ -36,7 +19,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// ----------------- ADMIN LOGIN -----------------
+/* ----------------- ADMIN LOGIN ----------------- */
+
 export async function adminLogin(email, password) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -47,7 +31,7 @@ export async function adminLogin(email, password) {
 
     if (token.claims.admin) {
       localStorage.setItem("loggedInAdmin", email);
-      window.location.href = "../../pages/dashboards/admin-dashboard.html"; // adjust path
+      window.location.href = "../../pages/dashboards/admin-dashboard.html"; 
     } else {
       alert("Access denied. Not an admin!");
       await signOut(auth);
@@ -57,27 +41,28 @@ export async function adminLogin(email, password) {
   }
 }
 
-// ----------------- MEMBER LOGIN -----------------
+/* ----------------- MEMBER LOGIN ----------------- */
+
 export async function memberLogin(email, password) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
     localStorage.setItem("loggedInMember", email);
-    window.location.href = "../../pages/dashboards/members-dashboard.html"; // adjust path
+    window.location.href = "../../pages/dashboards/members-dashboard.html"; 
   } catch (error) {
     alert(error.message);
   }
 }
 
-// ----------------- LOGOUT -----------------
+/* ----------------- LOGOUT ----------------- */
+
 export async function logout() {
   await signOut(auth);
   localStorage.removeItem("loggedInAdmin");
   localStorage.removeItem("loggedInMember");
-  window.location.href = "../../index.html"; // adjust path
+  window.location.href = "../../index.html"; 
 }
 
-// ----------------- CHECK ADMIN LOGIN -----------------
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+/* ----------------- CHECK ADMIN LOGIN ----------------- */
 
 export function checkAdminLogin() {
   onAuthStateChanged(auth, async (user) => {
@@ -96,27 +81,24 @@ export function checkAdminLogin() {
   });
 }
 
-
-// ----------------- CHECK MEMBER LOGIN -----------------
+/* ----------------- CHECK MEMBER LOGIN ----------------- */
 export function checkMemberLogin() {
   if (!localStorage.getItem("loggedInMember")) {
     window.location.href = "../../pages/auth/member-login.html";
   }
 }
 
-// ----------------- ADD MEMBER -----------------
+/* ----------------- ADD MEMBER ----------------- */
 export async function addMemberFirebase(memberId, name, username, password, email) {
   if (!memberId || !name || !username || !password || !email)
     throw new Error("All fields required");
 
-  // 1️⃣ Create Auth user
   const cred = await createUserWithEmailAndPassword(auth, email, password);
   const uid = cred.user.uid;
 
-  // 2️⃣ Save member with UID + memberId
   await setDoc(doc(db, "members", memberId), {
-    memberId,        // gym id (e.g. 888)
-    uid,             // 🔑 Firebase Auth UID
+    memberId,       
+    uid,             
     name,
     username,
     email,
@@ -124,14 +106,11 @@ export async function addMemberFirebase(memberId, name, username, password, emai
   });
 }
 
+/* ----------------- CREATE BILL ----------------- */
 
-// ----------------- CREATE BILL -----------------
 export async function createBillFirebase(memberId, amount, month) {
-  // 1️⃣ Find member by gym memberId FIELD
-  const q = query(
-    collection(db, "members"),
-    where("memberId", "==", memberId)
-  );
+  
+  const q = query( collection(db, "members"), where("memberId", "==", memberId));
 
   const snap = await getDocs(q);
 
@@ -141,18 +120,17 @@ export async function createBillFirebase(memberId, amount, month) {
 
   const member = snap.docs[0].data();
 
-  // 2️⃣ Create bill using UID
   await addDoc(collection(db, "bills"), {
-    memberId: member.memberId, // gym id (888)
-    uid: member.uid,           // 🔑 Firebase Auth UID
+    memberId: member.memberId,
+    uid: member.uid,           
     amount,
     month,
     createdAt: serverTimestamp()
   });
 }
 
+/* ----------------- SEND NOTIFICATION ----------------- */
 
-// ----------------- SEND NOTIFICATION -----------------
 export async function sendNotificationFirebase(message) {
   try {
     await addDoc(collection(db, "notifications"), { message, timestamp: new Date() });
@@ -161,7 +139,8 @@ export async function sendNotificationFirebase(message) {
   }
 }
 
-// ----------------- DIETS -----------------
+/* ----------------- DIETS ----------------- */
+
 export async function assignDiet(memberId, diet) {
   if (!memberId || !diet) throw new Error("Member ID and Diet Plan required");
   await setDoc(doc(db, "diets", memberId), { memberId, diet, assignedAt: new Date() });
@@ -176,7 +155,8 @@ export async function deleteDiet(memberId) {
   await deleteDoc(doc(db, "diets", memberId));
 }
 
-// ----------------- SUPPLEMENTS -----------------
+/* ----------------- SUPPLEMENTS ----------------- */
+
 export async function addSupplement(name, price, desc) {
   if (!name || !price) throw new Error("Name and Price required");
   await addDoc(collection(db, "supplements"), {
@@ -196,15 +176,16 @@ export async function deleteSupplement(docId) {
   await deleteDoc(doc(db, "supplements", docId));
 }
 
-// ----------------- MEMBER BILLS -----------------
+/* ----------------- MEMBER BILLS ----------------- */
+
 export async function getMemberBillsByUID(uid) {
   const q = query(collection(db, "bills"), where("uid", "==", uid));
   const snap = await getDocs(q);
   return snap.docs.map(doc => doc.data());
 }
 
+/* ----------------- GET NOTIFICATIONS ----------------- */
 
-// ----------------- GET NOTIFICATIONS -----------------
 export async function getAllNotifications() {
   const snap = await getDocs(collection(db, "notifications"));
   return snap.docs.map(doc => doc.data());

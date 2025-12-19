@@ -1,41 +1,13 @@
-import {
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-
-import {
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-
-import {
-  collection,
-  getDocs,
-  doc,
-  query,
-  where,
-  deleteDoc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-
-import {
-  db,
-  createBillFirebase,
-  sendNotificationFirebase,
-  checkAdminLogin,
-  logout,
-  assignDiet,
-  getAllDiets,
-  deleteDiet,
-  addSupplement,
-  getAllSupplements,
-  deleteSupplement
-} from "./firebase-app.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { collection, getDocs, doc, query, where, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { db, createBillFirebase, sendNotificationFirebase, checkAdminLogin, logout, assignDiet, getAllDiets, deleteDiet, addSupplement, getAllSupplements, deleteSupplement } from "./firebase-app.js";
 
 import { firebaseConfig } from "./firebase-app.js"
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 
-/* ================= LOGGING ================= */
+/* ------------------- LOGGING ------------------- */
 const DEBUG = true;
 const log = (...args) => console.log("[ADMIN]", ...args);
 const logErr = (...args) => console.error("[ADMIN ERROR]", ...args);
@@ -45,7 +17,7 @@ const secondaryApp = initializeApp(firebaseConfig, "Secondary");
 const secondaryAuth = getAuth(secondaryApp);
 console.log("Secondary Firebase Auth initialized successfully");
 
-/* ================= PROTECT PAGE ================= */
+/* -------------------- PROTECT PAGE --------------------- */
 log("Checking admin authentication...");
 checkAdminLogin();
 
@@ -54,7 +26,7 @@ document.getElementById("logoutBtn")?.addEventListener("click", () => {
   logout();
 });
 
-/* ================= ELEMENTS ================= */
+/* ----------------------- ELEMENTS ---------------------- */
 const memberName = document.getElementById("memberName");
 const memberMsg = document.getElementById("memberMsg");
 const billMsg = document.getElementById("billMsg");
@@ -102,8 +74,8 @@ const exportDietBtn = document.getElementById("exportDietBtn");
 const exportSupplementsBtn = document.getElementById("exportSupplementsBtn");
 const exportAllBtn = document.getElementById("exportAllBtn");
 
+/* ------------------ ADD MEMBER -------------------- */
 
-/* ================= ADD MEMBER ================= */
 document.getElementById("addMemberBtn")?.addEventListener("click", async () => {
   log("Add Member Clicked")
 
@@ -122,7 +94,7 @@ document.getElementById("addMemberBtn")?.addEventListener("click", async () => {
 
   try {
     log("Creating auth user", email)
-    // 1️⃣ Create Auth user
+    // Create Auth user
     const userCredential = await createUserWithEmailAndPassword(
       secondaryAuth,
       email,
@@ -132,7 +104,7 @@ document.getElementById("addMemberBtn")?.addEventListener("click", async () => {
     const user = userCredential.user;
     log("Auth user created", user.uid)
 
-    // 2️⃣ Create Firestore document
+    // Create Firestore document
     await setDoc(doc(db, "members", user.uid), {
       uid: user.uid,
       memberId: memberId,
@@ -189,7 +161,7 @@ async function renderMembersTable() {
   })
 }
 
-/* ================= UPDATE MEMBER ================= */
+/* ------------------ UPDATE MEMBER ------------------ */
 
 document.getElementById("updateMemberBtn")?.addEventListener("click", async () => {
   log("Update Member Clicked")
@@ -238,7 +210,7 @@ document.getElementById("updateMemberBtn")?.addEventListener("click", async () =
   }
 });
 
-/* ================= CREATE BILL ================= */
+/* ------------------ CREATE BILL ------------------ */
 
 document.getElementById("createBillBtn")?.addEventListener("click", async () => {
   log("Created Bill Clicked")
@@ -297,7 +269,7 @@ async function renderBillsTable() {
   });
 }
 
-/* ================= SEND NOTIFICATION ================= */
+/* ------------------ SEND NOTIFICATION ------------------ */
 
 document.getElementById("sendNoteBtn")?.addEventListener("click", async () => {
   log("Send Notification clicked")
@@ -349,7 +321,7 @@ async function renderNotifications() {
   });
 }
 
-/* ================= DIET ================= */
+/* ------------------ DIET ------------------ */
 
 document.getElementById("assignDietBtn")?.addEventListener("click", async () => {
   log("Assign diet clicked")
@@ -385,7 +357,6 @@ window.removeDiet = async (id) => {
   renderDietTable();
 };
 
-
 //Render Diets
 async function renderDietTable() {
   log("Rendering diets table")
@@ -403,7 +374,7 @@ async function renderDietTable() {
   });
 }
 
-/* ================= SUPPLEMENTS ================= */
+/* ------------------ SUPPLEMENTS ------------------ */
 
 document.getElementById("addSupplementBtn")?.addEventListener("click", async () => {
   log("Add Supplement clicked")
@@ -455,7 +426,7 @@ async function renderSupplementsTable() {
   });
 }
 
-/* ================= ASSIGN PACKAGE FUNCTION ================= */
+/* ------------------ ASSIGN PACKAGE FUNCTION ------------------ */
 
 document.getElementById("assignPackageBtn").addEventListener("click", async () => {
   log("Assign Package clicked")
@@ -501,8 +472,7 @@ document.getElementById("assignPackageBtn").addEventListener("click", async () =
   }
 });
 
-
-/* ================= EXCEL EXPORT FUNCTION ================= */
+/* ------------------ EXCEL EXPORT FUNCTION ------------------ */
 
 function exportToExcel(filename, data, sheetName) {
   log("Export started", filename)
@@ -522,7 +492,7 @@ function exportToExcel(filename, data, sheetName) {
   log("Export completed", filename)
 }
 
-/* ================= EXPORT BUTTONS ================= */
+/* ------------------ EXPORT BUTTONS ------------------ */
 
 exportMembersBtn.onclick = async () => {
   log("Export Members clicked")
@@ -580,7 +550,7 @@ exportAllBtn.addEventListener("click", () => {
   exportSupplementsBtn.onclick();
 });
 
-/* ================= INITIAL LOAD ================= */
+/* ------------------ INITIAL LOAD ------------------ */
 
 renderMembersTable();
 renderBillsTable();
