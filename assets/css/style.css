@@ -90,43 +90,44 @@ nav h2 {
 }
 
 /* HERO SECTION */
-.hero {
+.hero-main {
   text-align: center;
   padding: 10px 10px;
   color: white;
+  height: 80vh;
+  overflow: hidden;
   position: relative;
 }
 
-.hero img {
+.hero-main img {
   width: 100%;
   height: auto;
-  max-height: 80vh;
   object-fit: cover;
 }
 
-.hero h1,
-.hero p,
-.hero button {
+.hero-main h1,
+.hero-main p,
+.hero-main button {
   position: absolute;
   align-items: center;
   left: 5%;
   animation: fadeIn 1.2s ease-in-out;
 }
 
-.hero h1 {
+.hero-main h1 {
   top: 20%;
   font-size: 60px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.hero p {
+.hero-main p {
   top: 33%;
   font-size: larger;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 300;
 }
 
-.hero button {
+.hero-main button {
   top: 40%;
   padding: 5px;
   height: 40px;
@@ -139,6 +140,19 @@ nav h2 {
 
   transition: 0.3s;
   cursor: pointer;
+}
+
+.hero-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
 }
 
 @keyframes fadeIn {
@@ -567,7 +581,7 @@ ul#notesList li {
   position: relative;
 }
 
-.hero::after {
+.hero-about::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -972,15 +986,15 @@ input {
     margin-top: 10px;
   }
 
-  .hero h1,
-  .hero p,
-  .hero button {
+  .hero-main h1,
+  .hero-main p,
+  .hero-main button {
     position: static;
     margin: 10px auto;
     left: auto;
   }
 
-  .hero {
+  .hero-main {
     padding: 40px 15px;
   }
 
@@ -1016,15 +1030,15 @@ input {
     font-size: 12px;
   }
 
-  .hero h1 {
+  .hero-main h1 {
     font-size: 28px;
   }
 
-  .hero p {
+  .hero-main p {
     font-size: 15px;
   }
 
-  .hero button {
+  .hero-main button {
     width: 140px;
   }
 }
@@ -1035,11 +1049,11 @@ input {
     font-size: 36px;
   }
 
-  .hero h1 {
+  .hero-main h1 {
     font-size: 44px;
   }
 
-  .hero p {
+  .hero-main p {
     font-size: 18px;
   }
 
@@ -1062,7 +1076,7 @@ input {
 }
 
 @media (min-width: 1400px) {
-  .hero h1 {
+  .hero-main h1 {
     font-size: 64px;
   }
 
