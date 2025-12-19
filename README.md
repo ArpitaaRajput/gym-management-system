@@ -175,6 +175,11 @@ The Gym Management System follows a structured workflow to ensure secure access,
 
 ---
 
+## Live Demo
+Check out the live project here: [Netlify Link] ( https://gym-management-system-project.netlify.app/ )
+
+-----
+
 ## 👩‍💻 Author
 
 **Arpita Rawat**
