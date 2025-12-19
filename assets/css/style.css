@@ -99,7 +99,9 @@ nav h2 {
 
 .hero img {
   width: 100%;
-  height: 700px;
+  height: auto;
+  max-height: 80vh;
+  object-fit: cover;
 }
 
 .hero h1,
@@ -149,7 +151,6 @@ nav h2 {
     opacity: 1;
     transform: translateY(0px);
   }
-
 }
 
 /* PAGE TITLE */
@@ -341,13 +342,6 @@ table tr:hover {
   z-index: 2;
 }
 
-@media screen and (max-width: 768px) {
-  .table-card {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
-
 .table-card tbody::-webkit-scrollbar {
   width: 10px;
 }
@@ -497,49 +491,6 @@ ul#notesList li {
   font-size: 15px;
   color: #ccc;
   line-height: 1.6;
-}
-
-/* RESPONSIVE */
-@media screen and (max-width: 768px) {
-
-  .admin-container,
-  .member-container,
-  .features-about,
-  .features-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero {
-    padding: 50px 20px;
-  }
-
-  .page-title {
-    font-size: 28px;
-  }
-
-  .features h2 {
-    font-size: 28px;
-    margin-bottom: 40px;
-  }
-
-  .feature i {
-    font-size: 40px;
-  }
-
-  .feature h3 {
-    font-size: 20px;
-  }
-
-  .feature p {
-    font-size: 14px;
-  }
-
-  .btn {
-    height: 40px;
-    font-size: 10px;
-    word-spacing: 2px;
-  }
 }
 
 .hero-contact {
@@ -997,4 +948,125 @@ input {
 
 .scroll-box::-webkit-scrollbar-thumb:hover {
   background-color: #ff2e2e;
+}
+
+@media (max-width: 600px) {
+
+  nav {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+
+  nav h2 {
+    font-size: 26px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .home-icon {
+    position: static;
+    margin-top: 10px;
+  }
+
+  .hero h1,
+  .hero p,
+  .hero button {
+    position: static;
+    margin: 10px auto;
+    left: auto;
+  }
+
+  .hero {
+    padding: 40px 15px;
+  }
+
+  .admin-container,
+  .member-container,
+  .user-container,
+  .table-container {
+    gap: 25px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .table-card {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-section,
+  .features-about,
+  .trainers {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    font-size: 12px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .hero button {
+    width: 140px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+
+  nav h2 {
+    font-size: 36px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .admin-container,
+  .member-container,
+  .user-container,
+  .table-container {
+    gap: 50px;
+  }
+
+  .table-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero h1 {
+    font-size: 64px;
+  }
+
+  .features-section {
+    padding: 100px 15%;
+  }
 }
