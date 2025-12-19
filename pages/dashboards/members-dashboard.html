@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+  <header>
+    <h2 class="page-title">Member Dashboard</h2>
+    <button class="btn" id="logoutBtn">Logout</button>
+  </header>
+
+  <div class="search-wrapper">
+    <div class="search-container">
+      <input type="text" id="searchBillInput" placeholder="Search bills by month or amount..." />
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <div class="members-container">
+    <div class="card">
+      <h3>Your Bills</h3>
+      <div id="memberBill" class="scroll-box">Loading bills...</div>
+    </div>
+
+    <div class="card">
+      <h3>Notifications</h3>
+      <div id="memberNote" class="scroll-bar">Loading notifications...</div>
+    </div>
+  </div>
+
+  <!-- Supplement Store Section -->
+  <section class="supplement-store">
+    <h3>Supplement Store</h3>
+    <table id="memberSupplementsTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </section>
+
+
+  <script type="module" src="/assets/js/members-dashboard.js"></script>
+</body>
+
+</html>

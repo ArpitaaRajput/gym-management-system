@@ -1,0 +1,21 @@
+# Firebase
+.firebase/
+.firebase.json
+firestore-debug.log
+
+# Firebase Admin SDK
+firebase-admin-setup/
+
+# Environment files
+.env
+.env.local
+
+# Node modules
+node_modules/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+  <header>
+    <h2 class="page-title">Admin Dashboard</h2>
+    <button class="btn" id="logoutBtn">Logout</button>
+  </header>
+
+  <!-- ================= CARDS SECTION ================= -->
+
+  <div class="admin-container">
+
+    <!-- Add Member Card -->
+    <div class="card">
+      <h3>Add Member</h3>
+      <input type="text" id="memberID" placeholder="Member ID">
+      <input type="text" id="memberName" placeholder="Member Name">
+      <input type="text" id="memberPassword" placeholder="Member Password">
+      <input type="text" id="memberEmail" placeholder="Member Email Id">
+      <button id="addMemberBtn">Add Member</button>
+      <p id="memberMsg" class="msg"></p>
+    </div>
+
+    <!-- Update Member Card -->
+    <div class="card">
+      <h3>Update Member</h3>
+      <input type="text" id="updateMemberID" placeholder="Member ID to update">
+      <input type="text" id="updateMemberName" placeholder="New Name">
+      <input type="text" id="updateMemberEmail" placeholder="New Email">
+      <input type="text" id="updateMemberFeePackage" placeholder="New Fee Package">
+      <button id="updateMemberBtn">Update Member</button>
+      <p id="updateMemberMsg" class="msg"></p>
+    </div>
+
+
+    <!-- Create Bill Card -->
+    <div class="card">
+      <h3>Create Bill</h3>
+      <input type="text" id="billMemberID" placeholder="Member ID">
+      <input type="number" id="billAmount" placeholder="Amount">
+      <input type="text" id="billMonth" placeholder="Month">
+      <button id="createBillBtn">Create Bill</button>
+      <p id="billMsg" class="msg"></p>
+    </div>
+
+    <!-- Send Notification Card -->
+    <div class="card">
+      <h3>Send Notification</h3>
+      <input type="text" id="note" placeholder="Notification Message">
+      <button id="sendNoteBtn">Send Notification</button>
+      <p id="noteMsg" class="msg"></p>
+    </div>
+
+    <!-- Diet Card -->
+    <div class="card">
+      <h3>Assign Diet Plan</h3>
+      <input type="text" id="dietMemberID" placeholder="Member ID">
+      <textarea id="dietPlan" placeholder="Diet details"></textarea>
+      <button id="assignDietBtn">Assign Diet</button>
+      <p id="dietMsg" class="msg"></p>
+    </div>
+
+    <!-- Supplement Card -->
+    <div class="card">
+      <h3>Add Supplement</h3>
+      <input type="text" id="supplementName" placeholder="Supplement Name">
+      <input type="number" id="supplementPrice" placeholder="Price">
+      <textarea id="supplementDesc" placeholder="Description"></textarea>
+      <button id="addSupplementBtn">Add Supplement</button>
+      <p id="supplementMsg" class="msg"></p>
+    </div>
+
+    <!-- Fee Package Card -->
+    <div class="card">
+      <h3>Assign Fee Package</h3>
+      <input type="text" id="packageMemberID" placeholder="Member ID">
+      <select id="feePackage">
+        <option value="">Select Package</option>
+        <option value="Basic">Basic - ₹799</option>
+        <option value="Standard">Standard - ₹1299</option>
+        <option value="Premium">Premium - ₹1999</option>
+      </select>
+      <button id="assignPackageBtn">Assign Package</button>
+      <p id="packageMsg" class="msg"></p>
+    </div>
+
+    <!-- Reports Export Card -->
+    <div class="card">
+      <h3>Export Reports</h3>
+      <button id="exportMembersBtn">Export Members</button>
+      <button id="exportBillsBtn">Export Bills</button>
+      <button id="exportDietBtn">Export Diet Plans</button>
+      <button id="exportSupplementsBtn">Export Supplements</button>
+      <button id="exportAllBtn">Export All Reports</button>
+    </div>
+
+  </div>
+
+  <!-- Divider Between Cards & Tables -->
+  <div class="section-divider">
+    <h2>All Records</h2>
+    <hr>
+  </div>
+
+  <!-- ================= TABLES SECTION ================= -->
+
+  <section class="dashboard-tables">
+
+    <!-- Members Table -->
+    <div class="table-card">
+      <h3>Members List</h3>
+      <table id="membersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Fee Package</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Bills Table -->
+    <div class="table-card">
+      <h3>Bills List</h3>
+      <table id="billsTable">
+        <thead>
+          <tr>
+            <th>Member ID</th>
+            <th>Amount</th>
+            <th>Month</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Notifications -->
+    <div class="table-card">
+      <h3>Notifications</h3>
+      <table id="notificationsTable">
+        <thead>
+          <tr>
+            <th>Message</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Diet Table -->
+    <div class="table-card">
+      <h3>Diet Plans</h3>
+      <table id="dietTable">
+        <thead>
+          <tr>
+            <th>Member ID</th>
+            <th>Diet Plan</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Supplements Table -->
+    <div class="table-card">
+      <h3>Supplements List</h3>
+      <table id="supplementsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script type="module" src="/assets/js/admin-dashboard.js"></script>
+
+</body>
+</html>
